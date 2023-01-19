@@ -36,7 +36,7 @@ await anotherFuture().apiDelayed(
 );
 ```
 
-#### Set the default values
+### Set the default values
 
 You can change the default values of `duration` and `throwImmediatelyOnError` like this:
 
