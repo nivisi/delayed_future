@@ -1,6 +1,6 @@
 name: delayed_future
 description: A Dart extension that allows to delay your Futures.
-version: 1.0.0
+version: 1.0.2
 homepage: https://github.com/nivisi/delayed_future
 repository: https://github.com/nivisi/delayed_future
 issue_tracker: https://github.com/nivisi/delayed_future/issues
