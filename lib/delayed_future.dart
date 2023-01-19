@@ -28,12 +28,6 @@ class DelayedFuture {
 extension DelayedFutureExtension<T> on Future<T> {
   /// Delays your future to run for at least [duration] or, if not provided, [DelayedFuture.duration].
   ///
-  /// ### Example
-  ///
-  /// ```dart
-  /// final apiCall = await fetchMyData().delayed();
-  /// ```
-  ///
   /// ### Params
   ///
   /// - [duration] is the desired delay. If not provided,
@@ -41,6 +35,48 @@ extension DelayedFutureExtension<T> on Future<T> {
   /// by setting [DelayedFuture.duration].
   /// - [throwImmediatelyOnError] indicates whether not to wait until the delay expires
   /// in case the main future throws an error.
+  ///
+  /// ### Watch out!
+  ///
+  /// This methods delays the _result_ of the execution.
+  /// The future itself *will* be executed immediately.
+  ///
+  /// That means, if the future changes the state of the app in any way **during execution**,
+  /// this change **won't** be delayed.
+  ///
+  /// ### Example
+  ///
+  /// ```dart
+  /// // This will work as expected. We'll get the data after the delay.
+  /// final apiCall = await fetchMyData().delayed();
+  /// ```
+  ///
+  /// But let's look at the following example:
+  ///
+  /// ```dart
+  /// Future<void> makePageCyan() async {
+  ///   // Let's pretend it does something meaningful here ...
+  ///
+  ///   if (mounted) {
+  ///     setState(() {
+  ///       pageColor = Colors.cyan;
+  ///     });
+  ///   }
+  /// }
+  ///
+  /// ...
+  ///
+  /// await makePageBlue().delayed();
+  /// // This 👆 will make the page blue without any delay
+  /// // because the future itself will be executed immediately.
+  /// ```
+  ///
+  /// Consider refactoring it to this:
+  ///
+  /// ```dart
+  /// await Future.delayed(const Duration(milliseconds: 300));
+  /// await makePageBlue();
+  /// ```
   Future<T> delayed({
     Duration? duration,
     bool? throwImmediatelyOnError,
