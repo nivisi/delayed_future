@@ -17,7 +17,7 @@ import 'dart:async';
 class DelayedFuture {
   DelayedFuture._();
 
-  /// Default duration of the [DelayedFutureExtension.delayed] extension.
+  /// Default duration of the [DelayedFutureExtension.delayResult] extension.
   static Duration duration = const Duration(milliseconds: 350);
 
   /// Default config of [throwImmediatelyOnError].
@@ -77,7 +77,7 @@ extension DelayedFutureExtension<T> on Future<T> {
   /// await Future.delayed(const Duration(milliseconds: 300));
   /// await makePageBlue();
   /// ```
-  Future<T> delayed({
+  Future<T> delayResult({
     Duration? duration,
     bool? throwImmediatelyOnError,
   }) async {
