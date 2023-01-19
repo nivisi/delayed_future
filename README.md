@@ -23,9 +23,9 @@ dependencies:
 
 ```dart
 // This will use default values from the config.
-await anyFuture().delayed();
+await anyFuture().delayResult();
 
-await anotherFuture().delayed(
+await anotherFuture().delayResult(
     // Custom duration!
     duration: const Duration(milliseconds: 150),
 
