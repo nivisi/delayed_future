@@ -16,7 +16,7 @@ Add the dependency to **pubspec.yaml**:
 
 ```
 dependencies:
-  delayed_future: ^1.0.0
+  delayed_future: ^1.0.2+1
 ```
 
 ### Use it!
@@ -46,5 +46,5 @@ DelayedFuture.throwImmediatelyOnError = true;
 ```
 
 <!-- References -->
-[pub-version-img]: https://img.shields.io/badge/pub-v1.0.2-0175c2?logo=dart
+[pub-version-img]: https://img.shields.io/badge/pub-v1.0.2+1-0175c2?logo=dart
 [pub-version-url]: https://pub.dev/packages/delayed_future
