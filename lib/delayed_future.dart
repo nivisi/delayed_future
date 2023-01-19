@@ -19,6 +19,10 @@ class DelayedFuture {
 
   /// Default duration of the [DelayedFutureExtension.delayed] extension.
   static Duration duration = const Duration(milliseconds: 350);
+
+  /// Default config of [throwImmediatelyOnError].
+  /// Indicates whether to throw the exception immediately or to delay throwing.
+  static bool throwImmediatelyOnError = false;
 }
 
 extension DelayedFutureExtension<T> on Future<T> {
@@ -35,22 +39,19 @@ extension DelayedFutureExtension<T> on Future<T> {
   /// - [duration] is the desired delay. If not provided,
   /// [DelayedFuture.duration] is used. You can change the default duration value
   /// by setting [DelayedFuture.duration].
-  /// - [exitImmediatelyOnError] indicates whether not to wait until the delay expires
+  /// - [throwImmediatelyOnError] indicates whether not to wait until the delay expires
   /// in case the main future throws an error.
   Future<T> delayed({
     Duration? duration,
-    bool exitImmediatelyOnError = false,
+    bool? throwImmediatelyOnError,
   }) async {
     final results = await Future.wait(
       [
         this,
         Future.delayed(duration ?? DelayedFuture.duration),
       ],
-      eagerError: exitImmediatelyOnError,
-    );
-
-    delayed(
-      exitImmediatelyOnError: true,
+      eagerError:
+          throwImmediatelyOnError ?? DelayedFuture.throwImmediatelyOnError,
     );
 
     return results.first;
