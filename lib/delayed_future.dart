@@ -25,6 +25,44 @@ class DelayedFuture {
   static bool throwImmediatelyOnError = false;
 }
 
+extension DelayedFunctionExtension on void Function() {
+  /// Delays execution of the function for the given [duration] or, if not provided, for [DelayedFuture.duration].
+  ///
+  /// Use it like this:
+  ///
+  /// ```dart
+  /// void method() {
+  ///   /* Do sth ... */
+  /// }
+  ///
+  /// await method.delayCall();
+  /// ```
+  Future<void> delayCall([
+    Duration? duration,
+  ]) {
+    return Future.delayed(duration ?? DelayedFuture.duration, this);
+  }
+}
+
+extension DelayedFutureFunctionExtension<T> on Future<T> Function() {
+  /// Delays execution of the function for the given [duration] or, if not provided, for [DelayedFuture.duration].
+  ///
+  /// Use it like this:
+  ///
+  /// ```dart
+  /// Future<void> refresh() {
+  ///   /* Do refresh ... */
+  /// }
+  ///
+  /// await refresh.delayCall();
+  /// ```
+  Future<T> delayCall([
+    Duration? duration,
+  ]) {
+    return Future.delayed(duration ?? DelayedFuture.duration, this);
+  }
+}
+
 extension DelayedFutureExtension<T> on Future<T> {
   /// Delays your future to run for at least [duration] or, if not provided, [DelayedFuture.duration].
   ///
