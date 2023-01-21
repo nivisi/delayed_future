@@ -1,3 +1,7 @@
+## 1.0.3
+
+- Add extensions on VoidCallback and Future Function.
+
 ## 1.0.2+1
 
 - Update README
